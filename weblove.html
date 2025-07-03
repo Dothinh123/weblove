@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Do you love me?</title>
+  <link rel="icon" href="https://img.lovepik.com/png/20231017/Cute-pink-hearts-for-Valentine-s-Day-heart-shaped-heart_241852_wh860.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #ffe6f0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .main-content, .love-result {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    button {
+      background-color: #ff6fa1;
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 12px 24px;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      position: relative;
+    }
+
+    .love-result {
+      display: none;
+    }
+
+    .love-result h1 {
+      font-size: 28px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <!-- Giao diện câu hỏi ban đầu -->
+  <div class="main-content" id="mainContent">
+    <img src="https://media.tenor.com/QjzmsF9oGyYAAAAM/i-love-you.gif" alt="Cute Bear Ask" />
+    <h1>Do you love me?</h1>
+    <div class="button-container" id="btnContainer">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
+
+  <!-- Giao diện sau khi chọn "Yes" -->
+  <div class="love-result" id="resultContent">
+    <img src="https://media.tenor.com/W6_wdfPVhBMAAAAM/kristigocouple2024.gif" alt="Hug Result" />
+    <h1>Yayyy! I love you too! 💕 😍!</h1>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const container = document.getElementById('btnContainer');
+    const mainContent = document.getElementById('mainContent');
+    const resultContent = document.getElementById('resultContent');
+
+    function moveNoButton() {
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+    }
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+      );
+      if (distance < 100) {
+        moveNoButton();
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      mainContent.style.display = 'none';
+      resultContent.style.display = 'flex';
+    });
+  </script>
+</body>
+</html>
